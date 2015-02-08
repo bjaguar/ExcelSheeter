@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{02D02030-CE7F-4966-A9D9-E68CAAC47816}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExcelSheeter</RootNamespace>
+    <AssemblyName>ExcelSheeter</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ExcelSheeter.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlignmentStyle.cs" />
+    <Compile Include="ExcelAttribute.cs" />
+    <Compile Include="ExcelAttributeCollection.cs" />
+    <Compile Include="AttributeConstants.cs" />
+    <Compile Include="BorderLineStyle.cs" />
+    <Compile Include="BordersStyle.cs" />
+    <Compile Include="BorderStyle.cs" />
+    <Compile Include="BorderStyleCollection.cs" />
+    <Compile Include="BorderStylePosition.cs" />
+    <Compile Include="Cell.cs" />
+    <Compile Include="CellCollection.cs" />
+    <Compile Include="Column.cs" />
+    <Compile Include="ColumnCollection.cs" />
+    <Compile Include="ExcelData.cs" />
+    <Compile Include="DataType.cs" />
+    <Compile Include="ExcelEntity.cs" />
+    <Compile Include="ExcelEntityCollection.cs" />
+    <Compile Include="ExcelStyles.cs" />
+    <Compile Include="FontFamily.cs" />
+    <Compile Include="FontStyle.cs" />
+    <Compile Include="FontUnderline.cs" />
+    <Compile Include="FontVerticalAlign.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HorizontalAlignment.cs" />
+    <Compile Include="InteriorStyle.cs" />
+    <Compile Include="InteriorStylePattern.cs" />
+    <Compile Include="NumberFormatStyle.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtectionStyle.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="ReadingOrder.cs" />
+    <Compile Include="Resources\Exceptions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Exceptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Row.cs" />
+    <Compile Include="RowCollection.cs" />
+    <Compile Include="Style.cs" />
+    <Compile Include="StyleCollection.cs" />
+    <Compile Include="StyleEntity.cs" />
+    <Compile Include="Table.cs" />
+    <Compile Include="VerticalAlignment.cs" />
+    <Compile Include="Workbook.cs" />
+    <Compile Include="Worksheet.cs" />
+    <Compile Include="WorksheetCollection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="CustomDictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Exceptions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ExcelSheeter.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

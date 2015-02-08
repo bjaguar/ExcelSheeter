@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelSheeter", "ExcelSheeter\ExcelSheeter.csproj", "{02D02030-CE7F-4966-A9D9-E68CAAC47816}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7FCA7227-85DE-43C8-BFDF-C912E1BB8888}"
+	ProjectSection(SolutionItems) = preProject
+		Common\key.txt = Common\key.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelSheeter.Test", "ExcelSheeter.Test\ExcelSheeter.Test.csproj", "{73807D72-D24E-4215-9A44-7C7C81DD397B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelSheeter.Integration.Test", "ExcelSheeter.Integration.Test\ExcelSheeter.Integration.Test.csproj", "{67483C1B-ADD0-492C-83D3-F38CAA83061E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02D02030-CE7F-4966-A9D9-E68CAAC47816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D02030-CE7F-4966-A9D9-E68CAAC47816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D02030-CE7F-4966-A9D9-E68CAAC47816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D02030-CE7F-4966-A9D9-E68CAAC47816}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73807D72-D24E-4215-9A44-7C7C81DD397B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73807D72-D24E-4215-9A44-7C7C81DD397B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73807D72-D24E-4215-9A44-7C7C81DD397B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73807D72-D24E-4215-9A44-7C7C81DD397B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67483C1B-ADD0-492C-83D3-F38CAA83061E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67483C1B-ADD0-492C-83D3-F38CAA83061E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67483C1B-ADD0-492C-83D3-F38CAA83061E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67483C1B-ADD0-492C-83D3-F38CAA83061E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
