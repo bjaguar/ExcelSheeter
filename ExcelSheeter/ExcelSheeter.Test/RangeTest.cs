@@ -107,5 +107,34 @@ namespace ExcelSheeter.Test
             // Assert
             Assert.AreEqual("value2", returnedCell.Value);
         }
+
+        [TestMethod]
+        public void Range_GetCell_ByName_EmptyName_ThrowsException()
+        {
+            // Arrange
+            var paramName = string.Empty;
+            var range = new Range();
+
+            var cell1 = new Cell("value1");
+            var cell2 = new Cell("value2");
+            var cell3 = new Cell("value3");
+
+            var row = new Row();
+            row.Cells.Add(cell1);
+            row.Cells.Add(cell2);
+            row.Cells.Add(cell3);
+
+            range.Rows.Add(row);
+
+            // Act
+            try
+            {
+                var returnedCell = range.GetCell(string.Empty);
+            }
+            catch (ArgumentNullException ex) { paramName = ex.ParamName; }
+
+            // Assert
+            Assert.AreEqual("cell", paramName);
+        }
     }
 }

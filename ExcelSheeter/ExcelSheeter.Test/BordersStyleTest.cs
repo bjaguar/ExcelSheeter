@@ -41,13 +41,26 @@ namespace ExcelSheeter.Test
         {
             // Arrange
             var style = new BordersStyle();
-            style.Borders.Add(new BorderStyle());
+            style.Borders.Add(BorderStylePosition.Bottom);
 
             // Act
             var xml = style.OuterXml;
 
             // Assert
             Assert.IsNotNull(xml);
+        }
+
+        [TestMethod]
+        public void BordersStyle_OuterXml_EmptyXml()
+        {
+            // Arrange
+            var style = new BordersStyle();
+
+            // Act
+            var xml = style.OuterXml;
+
+            // Assert
+            Assert.IsTrue(string.IsNullOrWhiteSpace(xml));
         }
     }
 }

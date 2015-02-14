@@ -33,7 +33,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Creates a new instance of the <see cref="Cell"/> object.
         /// </summary>
-        public Cell()
+        internal Cell()
         {
         }
 
@@ -41,7 +41,7 @@ namespace ExcelSheeter
         /// Creates a new instance of the <see cref="Cell"/> object.
         /// </summary>
         /// <param name="value">The cell's value.</param>
-        public Cell(string value)
+        internal Cell(string value)
         {
             data.Value = value;
         }
@@ -51,7 +51,7 @@ namespace ExcelSheeter
         /// </summary>
         /// <param name="value">The cell's value.</param>
         /// <param name="dataType">The cell's data type.</param>
-        public Cell(object value, DataType dataType)
+        internal Cell(object value, DataType dataType)
         {
             data.Value = value;
             data.DataType = dataType;
@@ -60,7 +60,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Gets or sets the <see cref="Data"/> object that represents the cell's value.
         /// </summary>
-        public ExcelData Data
+        internal ExcelData Data
         {
             get { return data; }
         }

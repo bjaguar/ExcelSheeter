@@ -29,6 +29,10 @@ namespace ExcelSheeter
     /// </summary>
     public sealed class AlignmentStyle : StyleEntity
     {
+        internal AlignmentStyle()
+        {
+        }
+
         /// <summary>
         /// Gets or sts the horizontal alignment.
         /// </summary>

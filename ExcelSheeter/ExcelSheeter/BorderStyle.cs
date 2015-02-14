@@ -32,7 +32,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Creates a new instance of the <see cref="BorderStyle"/> object.
         /// </summary>
-        public BorderStyle()
+        internal BorderStyle()
         {
             Position = BorderStylePosition.Bottom;
             LineStyle = BorderLineStyle.Continuous;
@@ -42,7 +42,7 @@ namespace ExcelSheeter
         /// Creates a new instance of the <see cref="BorderStyle"/> object.
         /// </summary>
         /// <param name="position">Border's position.</param>
-        public BorderStyle(BorderStylePosition position)
+        internal BorderStyle(BorderStylePosition position)
         {
             Position = position;
             LineStyle = BorderLineStyle.Continuous;
@@ -54,7 +54,7 @@ namespace ExcelSheeter
         /// </summary>
         /// <param name="position">Border's position.</param>
         /// <param name="color">Border's color.</param>
-        public BorderStyle(BorderStylePosition position, string color)
+        internal BorderStyle(BorderStylePosition position, string color)
         {
             Position = position;
             Color = color;
@@ -68,7 +68,7 @@ namespace ExcelSheeter
         /// <param name="position">Border's position.</param>
         /// <param name="color">Border's color.</param>
         /// <param name="lineStyle">Border's line style.</param>
-        public BorderStyle(BorderStylePosition position, string color, BorderLineStyle lineStyle)
+        internal BorderStyle(BorderStylePosition position, string color, BorderLineStyle lineStyle)
         {
             Position = position;
             Color = color;
@@ -83,7 +83,7 @@ namespace ExcelSheeter
         /// <param name="color">Border's color.</param>
         /// <param name="lineStyle">Border's line style.</param>
         /// <param name="weight">Border's weight.</param>
-        public BorderStyle(BorderStylePosition position, string color, BorderLineStyle lineStyle, double weight)
+        internal BorderStyle(BorderStylePosition position, string color, BorderLineStyle lineStyle, double weight)
         {
             Position = position;
             Color = color;
@@ -106,7 +106,17 @@ namespace ExcelSheeter
         public string Color
         {
             get { return Attributes[AttributeConstants.ColorName]; }
-            set { Attributes[AttributeConstants.ColorName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.ColorName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.ColorName] = value;
+                }
+            }
         }
 
         /// <summary>

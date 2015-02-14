@@ -31,6 +31,10 @@ namespace ExcelSheeter
     {
         private Collection<Style> items = new Collection<Style>();
 
+        internal StyleCollection()
+        {
+        }
+
         /// <summary>
         /// Adds a new style to the collection.
         /// </summary>
@@ -55,9 +59,7 @@ namespace ExcelSheeter
         /// <returns>A value indicating if the item exists in the collection.</returns>
         public bool Contains(Style item)
         {
-            if (items.Any(x => x.Id.Equals(item.Id, StringComparison.OrdinalIgnoreCase))) throw new ArgumentException(Resources.Exceptions.StyleCollection_DuplicateId);
-
-            var value = items.Contains(item);
+            var value = items.Any(x => x.Id.Equals(item.Id, StringComparison.OrdinalIgnoreCase));
 
             return value;
         }

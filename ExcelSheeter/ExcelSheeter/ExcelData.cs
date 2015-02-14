@@ -27,7 +27,7 @@ namespace ExcelSheeter
     /// <summary>
     /// Represents the value of one cell specifying the data type.
     /// </summary>
-    public sealed class ExcelData : ExcelEntity
+    internal sealed class ExcelData : ExcelEntity
     {
         private object _value = string.Empty;
 

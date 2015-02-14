@@ -84,13 +84,13 @@ namespace ExcelSheeter
         }
 
         /// <summary>
-        /// Not yet implemented.
+        /// Returns a <see cref="Range"/>.
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <param name="height"></param>
-        /// <param name="width"></param>
-        /// <returns></returns>
+        /// <param name="row">Starting row.</param>
+        /// <param name="col">Starting column.</param>
+        /// <param name="height">Range's height.</param>
+        /// <param name="width">Range's width.</param>
+        /// <returns>A <see cref="Range"/>.</returns>
         public Range GetRange(int row, int col, int height, int width)
         {
             var range = new Range();

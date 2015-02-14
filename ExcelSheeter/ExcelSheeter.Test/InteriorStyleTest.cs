@@ -57,6 +57,38 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void InteriorStyle_ColorProperty_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var color = "#fff";
+
+            var style = new InteriorStyle();
+            style.Color = color;
+
+            // Act
+            style.Color = string.Empty;
+
+            // Assert
+            Assert.AreEqual(0, style.Attributes.Count);
+        }
+
+        [TestMethod]
+        public void InteriorStyle_PatternColorProperty_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var patternColor = "#fff";
+
+            var style = new InteriorStyle();
+            style.PatternColor = patternColor;
+
+            // Act
+            style.PatternColor = string.Empty;
+
+            // Assert
+            Assert.AreEqual(0, style.Attributes.Count);
+        }
+
+        [TestMethod]
         public void InteriorStyle_OuterXml()
         {
             // Arrange
@@ -74,6 +106,19 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.IsNotNull(xml);
+        }
+
+        [TestMethod]
+        public void InteriorStyle_OuterXml_EmptyXml()
+        {
+            // Arrange
+            var style = new InteriorStyle();
+
+            // Act
+            var xml = style.OuterXml;
+
+            // Assert
+            Assert.IsTrue(string.IsNullOrEmpty(xml));
         }
     }
 }

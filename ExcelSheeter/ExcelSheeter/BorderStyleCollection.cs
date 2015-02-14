@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -27,15 +28,35 @@ namespace ExcelSheeter
     /// <summary>
     /// Represents a collection of border styles.
     /// </summary>
-    public sealed class BorderStyleCollection : Collection<BorderStyle>
+    public sealed class BorderStyleCollection : IEnumerable<BorderStyle>
     {
+        private readonly Collection<BorderStyle> items = new Collection<BorderStyle>();
+
+        internal BorderStyleCollection()
+        {
+        }
+
+        internal bool Remove(BorderStylePosition position)
+        {
+            var item = items.FirstOrDefault(x => x.Position == position);
+
+            if (item != null)
+            {
+                return items.Remove(item);
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Adds a new border style.
         /// </summary>
         /// <param name="position">Border's position.</param>
         public void Add(BorderStylePosition position)
         {
-            Add(new BorderStyle(position));
+            Remove(position);
+
+            items.Add(new BorderStyle(position));
         }
 
         /// <summary>
@@ -45,7 +66,9 @@ namespace ExcelSheeter
         /// <param name="color">Border's color.</param>
         public void Add(BorderStylePosition position, string color)
         {
-            Add(new BorderStyle(position, color));
+            Remove(position);
+
+            items.Add(new BorderStyle(position, color));
         }
 
         /// <summary>
@@ -56,7 +79,9 @@ namespace ExcelSheeter
         /// <param name="lineStyle">Border's line style.</param>
         public void Add(BorderStylePosition position, string color, BorderLineStyle lineStyle)
         {
-            Add(new BorderStyle(position, color, lineStyle));
+            Remove(position);
+
+            items.Add(new BorderStyle(position, color, lineStyle));
         }
 
         /// <summary>
@@ -68,7 +93,49 @@ namespace ExcelSheeter
         /// <param name="weight">Border's weight.</param>
         public void Add(BorderStylePosition position, string color, BorderLineStyle lineStyle, double weight)
         {
-            Add(new BorderStyle(position, color, lineStyle, weight));
+            Remove(position);
+
+            items.Add(new BorderStyle(position, color, lineStyle, weight));
         }
+
+        /// <summary>
+        /// Gets an enumerator.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object.</returns>
+        public IEnumerator<BorderStyle> GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Gets an enumerator.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object.</returns>
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Gets the specified border.
+        /// </summary>
+        /// <param name="position">The border's position.</param>
+        /// <returns>A <see cref="BorderStyle"/> object.</returns>
+        public BorderStyle this[BorderStylePosition position]
+        {
+            get
+            {
+                var border = items.FirstOrDefault(x => x.Position == position);
+
+                if (border == null) throw new KeyNotFoundException();
+
+                return border;
+            }
+        }
+
+        /// <summary>
+        /// Gets the item count.
+        /// </summary>
+        public int Count { get { return items.Count; } }
     }
 }

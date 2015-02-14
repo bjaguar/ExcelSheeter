@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExcelSheeter.Test
@@ -101,6 +102,33 @@ namespace ExcelSheeter.Test
             Assert.AreEqual(color, style.Color);
             Assert.AreEqual(borderLineStyle, style.LineStyle);
             Assert.AreEqual(weight, style.Weight);
+        }
+
+        [TestMethod]
+        public void BorderStyle_OuterXml()
+        {
+            // Arrange
+            var style = new BorderStyle();
+
+            // Act
+            var xml = style.OuterXml;
+
+            // Assert
+            Assert.IsNotNull(xml);
+        }
+
+        [TestMethod]
+        public void BorderStyle_ColorProperty_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var style = new BorderStyle();
+            style.Color = "#fff";
+
+            // Act
+            style.Color = string.Empty;
+
+            // Assert
+            Assert.IsFalse(style.Attributes.Any(x => x.Key == AttributeConstants.ColorName));
         }
     }
 }

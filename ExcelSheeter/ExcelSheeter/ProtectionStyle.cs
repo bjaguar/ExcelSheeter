@@ -28,6 +28,10 @@ namespace ExcelSheeter
     /// </summary>
     public sealed class ProtectionStyle : StyleEntity
     {
+        internal ProtectionStyle()
+        {
+        }
+
         /// <summary>
         /// Gets or sets a value indicating if the protection is activated.
         /// </summary>

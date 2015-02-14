@@ -84,6 +84,113 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void FontStyle_BoldProperty_TrueValue()
+        {
+            // Arrange
+            var bold = true;
+
+            var style = new FontStyle();
+
+            // Act
+            style.Bold = bold;
+
+            // Assert
+            Assert.AreEqual(bold, style.Bold);
+        }
+
+        [TestMethod]
+        public void FontStyle_ItalicProperty_TrueValue()
+        {
+            // Arrange
+            var italic = true;
+
+            var style = new FontStyle();
+
+            // Act
+            style.Italic = italic;
+
+            // Assert
+            Assert.AreEqual(italic, style.Italic);
+        }
+
+        [TestMethod]
+        public void FontStyle_OutlineProperty_FalseValue()
+        {
+            // Arrange
+            var outline = false;
+
+            var style = new FontStyle();
+
+            // Act
+            style.Outline = outline;
+
+            // Assert
+            Assert.AreEqual(outline, style.Outline);
+        }
+
+        [TestMethod]
+        public void FontStyle_ShadowProperty_TrueValue()
+        {
+            // Arrange
+            var shadow = true;
+
+            var style = new FontStyle();
+
+            // Act
+            style.Shadow = shadow;
+
+            // Assert
+            Assert.AreEqual(shadow, style.Shadow);
+        }
+
+        [TestMethod]
+        public void FontStyle_StrikeThroughProperty_TrueValue()
+        {
+            // Arrange
+            var strikeThrough = true;
+
+            var style = new FontStyle();
+
+            // Act
+            style.StrikeThrough = strikeThrough;
+
+            // Assert
+            Assert.AreEqual(strikeThrough, style.StrikeThrough);
+        }
+
+        [TestMethod]
+        public void FontStyle_ColorProperty_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var color = "#fff";
+
+            var style = new FontStyle();
+            style.Color = color;
+
+            // Act
+            style.Color = string.Empty;
+
+            // Assert
+            Assert.AreEqual(0, style.Attributes.Count);
+        }
+
+        [TestMethod]
+        public void FontStyle_FontNameProperty_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var fontName = "Arial";
+
+            var style = new FontStyle();
+            style.FontName = fontName;
+
+            // Act
+            style.FontName = string.Empty;
+
+            // Assert
+            Assert.AreEqual(0, style.Attributes.Count);
+        }
+
+        [TestMethod]
         public void FontStyle_OuterXml()
         {
             // Arrange
@@ -119,6 +226,19 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.IsNotNull(xml);
+        }
+
+        [TestMethod]
+        public void FontStyle_OuterXml_EmptyXml()
+        {
+            // Arrange
+            var style = new FontStyle();
+
+            // Act
+            var xml = style.OuterXml;
+
+            // Assert
+            Assert.IsTrue(string.IsNullOrEmpty(xml));
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Creates a new instance of the <see cref="Row"/> object.
         /// </summary>
-        public Row()
+        internal Row()
         {
         }
 
@@ -76,7 +76,17 @@ namespace ExcelSheeter
         public string Caption
         {
             get { return Attributes[AttributeConstants.CaptionName]; }
-            set { Attributes[AttributeConstants.CaptionName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.CaptionName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.CaptionName] = value;
+                }
+            }
         }
 
         /// <summary>
@@ -128,7 +138,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Gets or sets the index of the row.
         /// </summary>
-        public long Index
+        internal long Index
         {
             get { return long.Parse(Attributes[AttributeConstants.IndexName], CultureInfo.InvariantCulture); }
             set { Attributes[AttributeConstants.IndexName] = value.ToString(CultureInfo.InvariantCulture); }
@@ -137,7 +147,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Gets or sets a value that specifies the number of adjacent rows with the same formatting as this row.
         /// </summary>
-        public long Span
+        internal long Span
         {
             get { return long.Parse(Attributes[AttributeConstants.SpanName], CultureInfo.InvariantCulture); }
             set { Attributes[AttributeConstants.SpanName] = value.ToString(CultureInfo.InvariantCulture); }
@@ -149,7 +159,17 @@ namespace ExcelSheeter
         public string StyleId
         {
             get { return Attributes[AttributeConstants.StyleIdName]; }
-            set { Attributes[AttributeConstants.StyleIdName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.StyleIdName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.StyleIdName] = value;
+                }
+            }
         }
 
         /// <summary>

@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -27,23 +28,58 @@ namespace ExcelSheeter
     /// <summary>
     /// Represents a collection of Excel cells.
     /// </summary>
-    public sealed class CellCollection : Collection<Cell>
+    public sealed class CellCollection : IEnumerable<Cell>
     {
+        private readonly Collection<Cell> items = new Collection<Cell>();
+
+        internal CellCollection()
+        {
+        }
+
+        internal void Add(Cell item)
+        {
+            items.Add(item);
+        }
+
         /// <summary>
-        /// Gets or sets a cell in the collection given it's index.
+        /// Gets an enumerator.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object.</returns>
+        public IEnumerator<Cell> GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Gets an enumerator.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object.</returns>
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Gets a cell in the collection given it's index.
         /// </summary>
         /// <param name="index">Index of the cell.</param>
         /// <returns>A <see cref="Cell"/> object.</returns>
-        public new Cell this[int index]
+        public Cell this[int index]
         {
             get
             {
-                return base[index];
-            }
-            set
-            {
-                base[index] = value;
+                while (index >= Count)
+                {
+                    Add(new Cell());
+                }
+
+                return items[index];
             }
         }
+
+        /// <summary>
+        /// Gets the cell count.
+        /// </summary>
+        public int Count { get { return items.Count; } }
     }
 }

@@ -60,6 +60,31 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void Row_GetCell_ByColumnName_EmptyName_ThrowsException()
+        {
+            // Arrange
+            var paramName = string.Empty;
+            var value1 = "value1";
+            var value2 = "value2";
+            var value3 = "value3";
+
+            var row = new Row();
+            row.Cells.Add(new Cell(value1));
+            row.Cells.Add(new Cell(value2));
+            row.Cells.Add(new Cell(value3));
+
+            // Act
+            try
+            {
+                var returnedCell1 = row.GetCell(string.Empty);
+            }
+            catch (ArgumentNullException ex) { paramName = ex.ParamName; }
+
+            // Assert
+            Assert.AreEqual("columnName", paramName);
+        }
+
+        [TestMethod]
         public void Row_GetCell_ByColumnName_TwoLetterColumns()
         {
             // Arrange
@@ -135,10 +160,40 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void Row_GetAndSet_Caption_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var value = "value";
+            var row = new Row();
+            row.Caption = value;
+
+            // Act
+            row.Caption = string.Empty;
+
+            // Assert
+            Assert.AreEqual(0, row.Attributes.Count);
+        }
+
+        [TestMethod]
         public void Row_GetAndSet_AutoFitWidth()
         {
             // Arrange
             var value = true;
+            var row = new Row();
+
+            // Act
+            row.AutoFitWidth = value;
+            var returnedValue = row.AutoFitWidth;
+
+            // Assert
+            Assert.AreEqual(value, returnedValue);
+        }
+
+        [TestMethod]
+        public void Row_GetAndSet_AutoFitWidth_FalseValue()
+        {
+            // Arrange
+            var value = false;
             var row = new Row();
 
             // Act
@@ -165,10 +220,25 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
-        public void Row_GetAndSet_Hidden()
+        public void Row_GetAndSet_Hidden_TrueValue()
         {
             // Arrange
             var value = true;
+            var row = new Row();
+
+            // Act
+            row.Hidden = value;
+            var returnedValue = row.Hidden;
+
+            // Assert
+            Assert.AreEqual(value, returnedValue);
+        }
+
+        [TestMethod]
+        public void Row_GetAndSet_Hidden_FalseValue()
+        {
+            // Arrange
+            var value = false;
             var row = new Row();
 
             // Act
@@ -222,6 +292,21 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.AreEqual(value, returnedValue);
+        }
+
+        [TestMethod]
+        public void Row_GetAndSet_StyleID_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var value = "value";
+            var row = new Row();
+            row.StyleId = value;
+
+            // Act
+            row.StyleId = string.Empty;
+
+            // Assert
+            Assert.AreEqual(0, row.Attributes.Count);
         }
 
         [TestMethod]

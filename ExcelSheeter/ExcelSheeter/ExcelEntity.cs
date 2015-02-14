@@ -31,6 +31,10 @@ namespace ExcelSheeter
     {
         private readonly ExcelAttributeCollection attributes = new ExcelAttributeCollection();
 
+        internal ExcelEntity()
+        {
+        }
+
         /// <summary>
         /// Gets the tag name of the entity.
         /// </summary>

@@ -30,6 +30,10 @@ namespace ExcelSheeter
     {
         private readonly BorderStyleCollection borders = new BorderStyleCollection();
 
+        internal BordersStyle()
+        {
+        }
+
         /// <summary>
         /// Gets the border collection.
         /// </summary>
@@ -62,7 +66,7 @@ namespace ExcelSheeter
         {
             get
             {
-                if (Attributes.Count > 0 || borders.Count > 0) return base.OuterXml;
+                if (borders.Count > 0) return base.OuterXml;
 
                 return string.Empty;
             }

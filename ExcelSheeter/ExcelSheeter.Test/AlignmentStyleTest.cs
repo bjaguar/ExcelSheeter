@@ -72,6 +72,51 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void AlignmentStyle_ShrinkToFitProperty_TrueValue()
+        {
+            // Arrange
+            var shrinkToFit = true;
+
+            var style = new AlignmentStyle();
+
+            // Act
+            style.ShrinkToFit = shrinkToFit;
+
+            // Assert
+            Assert.AreEqual(shrinkToFit, style.ShrinkToFit);
+        }
+
+        [TestMethod]
+        public void AlignmentStyle_VerticalTextProperty_TrueValue()
+        {
+            // Arrange
+            var verticalText = true;
+
+            var style = new AlignmentStyle();
+
+            // Act
+            style.VerticalText = verticalText;
+
+            // Assert
+            Assert.AreEqual(verticalText, style.VerticalText);
+        }
+
+        [TestMethod]
+        public void AlignmentStyle_WrapTextProperty_FalseValue()
+        {
+            // Arrange
+            var wrapText = false;
+
+            var style = new AlignmentStyle();
+
+            // Act
+            style.WrapText = wrapText;
+
+            // Assert
+            Assert.AreEqual(wrapText, style.WrapText);
+        }
+
+        [TestMethod]
         public void AlignmentStyle_OuterXml()
         {
             // Arrange
@@ -99,6 +144,19 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.IsNotNull(xml);
+        }
+
+        [TestMethod]
+        public void AlignmentStyle_OuterXml_EmptyXml()
+        {
+            // Arrange
+            var style = new AlignmentStyle();
+
+            // Act
+            var xml = style.OuterXml;
+
+            // Assert
+            Assert.IsTrue(string.IsNullOrWhiteSpace(xml));
         }
     }
 }

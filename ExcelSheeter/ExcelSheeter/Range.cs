@@ -31,6 +31,10 @@ namespace ExcelSheeter
     {
         private RowCollection rows = new RowCollection();
 
+        internal Range()
+        {
+        }
+
         /// <summary>
         /// Returns a <see cref="Cell"/> object.
         /// </summary>

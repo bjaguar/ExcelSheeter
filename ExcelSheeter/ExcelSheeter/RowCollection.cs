@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -27,23 +28,58 @@ namespace ExcelSheeter
     /// <summary>
     /// Represents a collection of <see cref="Row"/> objects.
     /// </summary>
-    public sealed class RowCollection : Collection<Row>
+    public sealed class RowCollection : IEnumerable<Row>
     {
+        private readonly Collection<Row> items = new Collection<Row>();
+
+        internal RowCollection()
+        {
+        }
+
+        internal void Add(Row row)
+        {
+            items.Add(row);
+        }
+
         /// <summary>
-        /// Gets or sets a <see cref="Row"/> object.
+        /// Gets an enumerator.
         /// </summary>
-        /// <param name="index">Index of the object.</param>
+        /// <returns>An <see cref="IEnumerator"/> object.</returns>
+        public IEnumerator<Row> GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Gets an enumerator.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object.</returns>
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Gets a <see cref="Row"/> object.
+        /// </summary>
+        /// <param name="index">Base 0 index of the row.</param>
         /// <returns>A <see cref="Row"/> object.</returns>
-        public new Row this[int index]
+        public Row this[int index]
         {
             get
             {
-                return (Row)base[index];
-            }
-            set
-            {
-                base[index] = value;
+                while (index >= Count)
+                {
+                    Add(new Row());
+                }
+
+                return items[index];
             }
         }
+
+        /// <summary>
+        /// Gets the item count.
+        /// </summary>
+        public int Count { get { return items.Count; } }
     }
 }

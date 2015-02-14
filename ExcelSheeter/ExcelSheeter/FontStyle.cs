@@ -29,6 +29,10 @@ namespace ExcelSheeter
     /// </summary>
     public sealed class FontStyle : StyleEntity
     {
+        internal FontStyle()
+        {
+        }
+
         /// <summary>
         /// Gets or sets a value indicating if the font is bold.
         /// </summary>
@@ -49,7 +53,17 @@ namespace ExcelSheeter
         public string Color
         {
             get { return Attributes[AttributeConstants.ColorName]; }
-            set { Attributes[AttributeConstants.ColorName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.ColorName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.ColorName] = value;
+                }
+            }
         }
 
         /// <summary>
@@ -58,7 +72,17 @@ namespace ExcelSheeter
         public string FontName
         {
             get { return Attributes[AttributeConstants.FontName]; }
-            set { Attributes[AttributeConstants.FontName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.FontName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.FontName] = value;
+                }
+            }
         }
 
         /// <summary>

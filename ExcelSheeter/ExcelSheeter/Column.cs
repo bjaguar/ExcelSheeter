@@ -32,7 +32,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Creates a new <see cref="Column"/> object.
         /// </summary>
-        public Column()
+        internal Column()
         {
         }
 
@@ -42,7 +42,17 @@ namespace ExcelSheeter
         public string Caption
         {
             get { return Attributes[AttributeConstants.CaptionName]; }
-            set { Attributes[AttributeConstants.CaptionName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.CaptionName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.CaptionName] = value;
+                }
+            }
         }
 
         /// <summary>
@@ -97,7 +107,17 @@ namespace ExcelSheeter
         public string StyleId
         {
             get { return Attributes[AttributeConstants.StyleIdName]; }
-            set { Attributes[AttributeConstants.StyleIdName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.StyleIdName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.StyleIdName] = value;
+                }
+            }
         }
 
         /// <summary>

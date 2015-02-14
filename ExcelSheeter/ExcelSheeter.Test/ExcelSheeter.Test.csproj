@@ -67,7 +67,6 @@
     <Compile Include="ColumnCollectionTest.cs" />
     <Compile Include="ColumnTest.cs" />
     <Compile Include="ExcelDataTest.cs" />
-    <Compile Include="ExcelEntityCollectionTest.cs" />
     <Compile Include="ExcelEntityTest.cs" />
     <Compile Include="ExcelStylesTest.cs" />
     <Compile Include="FontStyleTest.cs" />

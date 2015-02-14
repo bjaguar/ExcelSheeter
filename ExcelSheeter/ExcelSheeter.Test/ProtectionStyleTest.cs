@@ -36,10 +36,28 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
-        public void ProtectionStyle_GetSet_Properties()
+        public void ProtectionStyle_GetSet_Properties_TrueValues()
         {
             // Arrange
-            var @protected=true;
+            var @protected = true;
+            var hideFormula = true;
+
+            var style = new ProtectionStyle();
+
+            // Act
+            style.Protected = @protected;
+            style.HideFormula = hideFormula;
+
+            // Assert
+            Assert.AreEqual(@protected, style.Protected);
+            Assert.AreEqual(hideFormula, style.HideFormula);
+        }
+
+        [TestMethod]
+        public void ProtectionStyle_GetSet_Properties_FalseValues()
+        {
+            // Arrange
+            var @protected = false;
             var hideFormula = false;
 
             var style = new ProtectionStyle();
@@ -69,6 +87,19 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.IsNotNull(xml);
+        }
+
+        [TestMethod]
+        public void ProtectionStyle_OuterXml_EmptyXml()
+        {
+            // Arrange
+            var style = new ProtectionStyle();
+
+            // Act
+            var xml = style.OuterXml;
+
+            // Assert
+            Assert.IsTrue(string.IsNullOrEmpty(xml));
         }
     }
 }

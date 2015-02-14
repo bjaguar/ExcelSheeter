@@ -67,5 +67,80 @@ namespace ExcelSheeter.Test
             Assert.AreEqual(styleId, column.StyleId);
             Assert.AreEqual(width, column.Width);
         }
+
+        [TestMethod]
+        public void Column_AutoFitWidthProperty_FalseValue()
+        {
+            // Arrange
+            var autoFitWidth = false;
+
+            var column = new Column();
+
+            // Act
+            column.AutoFitWidth = autoFitWidth;
+
+            //Assert
+            Assert.AreEqual(autoFitWidth, column.AutoFitWidth);
+        }
+
+        [TestMethod]
+        public void Column_HiddenProperty_TrueValue()
+        {
+            // Arrange
+            var hidden = true;
+
+            var column = new Column();
+
+            // Act
+            column.Hidden = hidden;
+
+            //Assert
+            Assert.AreEqual(hidden, column.Hidden);
+        }
+
+        [TestMethod]
+        public void Column_StyleIdProperty_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var styleId = "id";
+
+            var column = new Column();
+            column.StyleId = styleId;
+
+            // Act
+            column.StyleId = string.Empty;
+
+            //Assert
+            Assert.AreEqual(0, column.Attributes.Count);
+        }
+
+        [TestMethod]
+        public void Column_CaptionProperty_EmptyValue_RemovesAttribute()
+        {
+            // Arrange
+            var caption = "caption";
+
+            var column = new Column();
+            column.Caption = caption;
+
+            // Act
+            column.Caption = string.Empty;
+
+            //Assert
+            Assert.AreEqual(0, column.Attributes.Count);
+        }
+
+        [TestMethod]
+        public void Column_OuterXml()
+        {
+            // Arrange
+            var column = new Column();
+
+            // Act
+            var xml = column.OuterXml;
+
+            //Assert
+            Assert.IsNotNull(xml);
+        }
     }
 }

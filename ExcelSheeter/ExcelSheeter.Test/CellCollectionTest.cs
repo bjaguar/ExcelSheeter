@@ -17,6 +17,7 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections;
 
 namespace ExcelSheeter.Test
 {
@@ -36,35 +37,42 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
-        public void CellCollection_ByKey_SetValue()
+        public void CellCollection_GetEnumerator()
         {
             // Arrange
-            var value = "value";
-            var cell = new Cell(value);
             var list = new CellCollection();
 
             // Act
-            list[0] = cell;
+            var enumerator = list.GetEnumerator();
 
             // Assert
-            Assert.AreEqual(1, list.Count);
+            Assert.IsNotNull(enumerator);
+        }
+
+        [TestMethod]
+        public void CellCollection_GetEnumerator_2()
+        {
+            // Arrange
+            var list = new CellCollection();
+
+            // Act
+            var enumerator = (list as IEnumerable).GetEnumerator();
+
+            // Assert
+            Assert.IsNotNull(enumerator);
         }
 
         [TestMethod]
         public void CellCollection_ByKey_GetValue()
         {
             // Arrange
-            var value = "value";
-            var cell = new Cell(value);
-
             var list = new CellCollection();
-            list[0] = cell;
 
             // Act
-            var returnedCell = list[0];
+            var returnedCell = list[1];
 
             // Assert
-            Assert.AreEqual(cell, returnedCell);
+            Assert.IsNotNull(returnedCell);
         }
     }
 }

@@ -63,7 +63,6 @@
     <Compile Include="ExcelData.cs" />
     <Compile Include="DataType.cs" />
     <Compile Include="ExcelEntity.cs" />
-    <Compile Include="ExcelEntityCollection.cs" />
     <Compile Include="ExcelStyles.cs" />
     <Compile Include="FontFamily.cs" />
     <Compile Include="FontStyle.cs" />

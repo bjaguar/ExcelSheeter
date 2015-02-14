@@ -26,9 +26,13 @@ namespace ExcelSheeter
     /// <summary>
     /// Represents the Excel styles.
     /// </summary>
-    public sealed class ExcelStyles : ExcelEntity
+    internal sealed class ExcelStyles : ExcelEntity
     {
         private StyleCollection styles = new StyleCollection();
+
+        internal ExcelStyles()
+        {
+        }
 
         /// <summary>
         /// Gets or sets the style collection.

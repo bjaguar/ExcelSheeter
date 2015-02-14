@@ -17,6 +17,7 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections;
 
 namespace ExcelSheeter.Test
 {
@@ -36,6 +37,21 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void BorderStyleCollection_Add_ExistingBorder_OverritesItem()
+        {
+            // Arrange
+            var list = new BorderStyleCollection();
+            list.Add(BorderStylePosition.Bottom);
+
+            // Act
+            list.Add(BorderStylePosition.Bottom, "#fff");
+
+            // Assert
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual("#fff", list[BorderStylePosition.Bottom].Color);
+        }
+
+        [TestMethod]
         public void BorderStyleCollection_Add_WithParams_Position()
         {
             // Arrange
@@ -48,7 +64,7 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(position, list[0].Position);
+            Assert.AreEqual(position, list[BorderStylePosition.Left].Position);
         }
 
         [TestMethod]
@@ -65,8 +81,8 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(position, list[0].Position);
-            Assert.AreEqual(color, list[0].Color);
+            Assert.AreEqual(position, list[BorderStylePosition.Left].Position);
+            Assert.AreEqual(color, list[BorderStylePosition.Left].Color);
         }
 
         [TestMethod]
@@ -84,9 +100,9 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(position, list[0].Position);
-            Assert.AreEqual(color, list[0].Color);
-            Assert.AreEqual(lineStyle, list[0].LineStyle);
+            Assert.AreEqual(position, list[BorderStylePosition.Left].Position);
+            Assert.AreEqual(color, list[BorderStylePosition.Left].Color);
+            Assert.AreEqual(lineStyle, list[BorderStylePosition.Left].LineStyle);
         }
 
         [TestMethod]
@@ -105,10 +121,82 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(position, list[0].Position);
-            Assert.AreEqual(color, list[0].Color);
-            Assert.AreEqual(lineStyle, list[0].LineStyle);
-            Assert.AreEqual(weight, list[0].Weight);
+            Assert.AreEqual(position, list[BorderStylePosition.Left].Position);
+            Assert.AreEqual(color, list[BorderStylePosition.Left].Color);
+            Assert.AreEqual(lineStyle, list[BorderStylePosition.Left].LineStyle);
+            Assert.AreEqual(weight, list[BorderStylePosition.Left].Weight);
+        }
+
+        [TestMethod]
+        public void BorderStyleCollection_GetEnumerator()
+        {
+            // Arrange
+            var list = new BorderStyleCollection();
+
+            // Act
+            var enumerator = list.GetEnumerator();
+
+            // Assert
+            Assert.IsNotNull(enumerator);
+        }
+
+        [TestMethod]
+        public void BorderStyleCollection_GetEnumerator_2()
+        {
+            // Arrange
+            var list = new BorderStyleCollection();
+
+            // Act
+            var enumerator = (list as IEnumerable).GetEnumerator();
+
+            // Assert
+            Assert.IsNotNull(enumerator);
+        }
+
+        [TestMethod]
+        public void BorderStyleCollection_Get_BorderNotFound_ThrowsException()
+        {
+            // Arrange
+            var thrown = false;
+            var list = new BorderStyleCollection();
+
+            // Act
+            try
+            {
+                var border = list[BorderStylePosition.Left];
+            }
+            catch { thrown = true; }
+
+            // Assert
+            Assert.IsTrue(thrown);
+        }
+
+        [TestMethod]
+        public void BorderStyleCollection_Remove()
+        {
+            // Arrange
+            var list = new BorderStyleCollection();
+            list.Add(BorderStylePosition.Bottom);
+
+            // Act
+            var value = list.Remove(BorderStylePosition.Bottom);
+
+            // Assert
+            Assert.IsTrue(value);
+        }
+
+        [TestMethod]
+        public void BorderStyleCollection_Remove_ItemNotFound_ReturnsFalse()
+        {
+            // Arrange
+            var list = new BorderStyleCollection();
+            list.Add(BorderStylePosition.Bottom);
+
+            // Act
+            var value = list.Remove(BorderStylePosition.Top);
+
+            // Assert
+            Assert.IsFalse(value);
         }
     }
 }

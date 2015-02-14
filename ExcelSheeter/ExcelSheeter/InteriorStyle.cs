@@ -28,13 +28,27 @@ namespace ExcelSheeter
     /// </summary>
     public sealed class InteriorStyle : StyleEntity
     {
+        internal InteriorStyle()
+        {
+        }
+
         /// <summary>
         /// Gets or sets the color.
         /// </summary>
         public string Color
         {
             get { return Attributes[AttributeConstants.ColorName]; }
-            set { Attributes[AttributeConstants.ColorName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.ColorName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.ColorName] = value;
+                }
+            }
         }
 
         /// <summary>
@@ -52,7 +66,17 @@ namespace ExcelSheeter
         public string PatternColor
         {
             get { return Attributes[AttributeConstants.PatternColorName]; }
-            set { Attributes[AttributeConstants.PatternColorName] = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    Attributes.Remove(AttributeConstants.PatternColorName);
+                }
+                else
+                {
+                    Attributes[AttributeConstants.PatternColorName] = value;
+                }
+            }
         }
 
         internal override string TagName { get { return "ss:Interior"; } }
