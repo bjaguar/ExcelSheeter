@@ -128,6 +128,54 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void BorderStyleCollection_Add_WithParams_Color()
+        {
+            // Arrange
+            var color = "#fff";
+
+            var list = new BorderStyleCollection();
+
+            // Act
+            list.Add(color);
+
+            // Assert
+            Assert.AreEqual(4, list.Count);
+        }
+
+        [TestMethod]
+        public void BorderStyleCollection_Add_WithParams_Color_LineStyle()
+        {
+            // Arrange
+            var color = "#fff";
+            var lineStyle = BorderLineStyle.SlantDashDot;
+
+            var list = new BorderStyleCollection();
+
+            // Act
+            list.Add(color, lineStyle);
+
+            // Assert
+            Assert.AreEqual(4, list.Count);
+        }
+
+        [TestMethod]
+        public void BorderStyleCollection_Add_WithParams_Color_LineStyle_Weight()
+        {
+            // Arrange
+            var color = "#fff";
+            var lineStyle = BorderLineStyle.SlantDashDot;
+            var weight = 10;
+
+            var list = new BorderStyleCollection();
+
+            // Act
+            list.Add(color, lineStyle, weight);
+
+            // Assert
+            Assert.AreEqual(4, list.Count);
+        }
+
+        [TestMethod]
         public void BorderStyleCollection_GetEnumerator()
         {
             // Arrange

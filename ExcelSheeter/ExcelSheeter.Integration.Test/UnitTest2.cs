@@ -26,10 +26,7 @@ namespace ExcelSheeter.Integration.Test
             var style1 = workbook.AddStyle("style1");
             style1.AlignmentStyle.Horizontal = HorizontalAlignment.Center;
             style1.AlignmentStyle.ShrinkToFit = true;
-            style1.Borders.Add(BorderStylePosition.Bottom, "#000000", BorderLineStyle.Continuous);
-            style1.Borders.Add(BorderStylePosition.Left, "#000000", BorderLineStyle.Continuous);
-            style1.Borders.Add(BorderStylePosition.Right, "#000000", BorderLineStyle.Continuous);
-            style1.Borders.Add(BorderStylePosition.Top, "#000000", BorderLineStyle.Continuous);
+            style1.Borders.Add("#000000", BorderLineStyle.Continuous);
             style1.FontStyle.Bold = true;
             style1.FontStyle.Family = FontFamily.Modern;
             style1.FontStyle.FontName = "Arial";

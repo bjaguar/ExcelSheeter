@@ -48,6 +48,70 @@ namespace ExcelSheeter
             return false;
         }
 
+        internal void RemoveAll()
+        {
+            Remove(BorderStylePosition.Bottom);
+            Remove(BorderStylePosition.DiagonalLeft);
+            Remove(BorderStylePosition.DiagonalRight);
+            Remove(BorderStylePosition.Left);
+            Remove(BorderStylePosition.Right);
+            Remove(BorderStylePosition.Top);
+        }
+
+        /// <summary>
+        /// Adds a new border style.
+        /// </summary>
+        /// <remarks>
+        /// <para>The border applies to bottom, top, left and right.</para>
+        /// </remarks>
+        /// <param name="color">Border's color.</param>
+        public void Add(string color)
+        {
+            RemoveAll();
+
+            items.Add(new BorderStyle(BorderStylePosition.Bottom, color));
+            items.Add(new BorderStyle(BorderStylePosition.Left, color));
+            items.Add(new BorderStyle(BorderStylePosition.Right, color));
+            items.Add(new BorderStyle(BorderStylePosition.Top, color));
+        }
+
+        /// <summary>
+        /// Adds a new border style.
+        /// </summary>
+        /// <remarks>
+        /// <para>The border applies to bottom, top, left and right.</para>
+        /// </remarks>
+        /// <param name="color">Border's color.</param>
+        /// <param name="lineStyle">Border's line style.</param>
+        public void Add(string color, BorderLineStyle lineStyle)
+        {
+            RemoveAll();
+
+            items.Add(new BorderStyle(BorderStylePosition.Bottom, color, lineStyle));
+            items.Add(new BorderStyle(BorderStylePosition.Left, color, lineStyle));
+            items.Add(new BorderStyle(BorderStylePosition.Right, color, lineStyle));
+            items.Add(new BorderStyle(BorderStylePosition.Top, color, lineStyle));
+        }
+
+        /// <summary>
+        /// Adds a new border style.
+        /// </summary>
+        /// <remarks>
+        /// <para>The border applies to bottom, top, left and right.</para>
+        /// </remarks>
+        /// <param name="color">Border's color.</param>
+        /// <param name="lineStyle">Border's line style.</param>
+        /// <param name="weight">Border's weight.</param>
+        public void Add(string color, BorderLineStyle lineStyle, double weight)
+        {
+            RemoveAll();
+
+            items.Add(new BorderStyle(BorderStylePosition.Bottom, color, lineStyle, weight));
+            items.Add(new BorderStyle(BorderStylePosition.Left, color, lineStyle, weight));
+            items.Add(new BorderStyle(BorderStylePosition.Right, color, lineStyle, weight));
+            items.Add(new BorderStyle(BorderStylePosition.Top, color, lineStyle, weight));
+        }
+
         /// <summary>
         /// Adds a new border style.
         /// </summary>
