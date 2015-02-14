@@ -52,17 +52,6 @@ namespace ExcelSheeter
         /// Adds a new border style.
         /// </summary>
         /// <param name="position">Border's position.</param>
-        public void Add(BorderStylePosition position)
-        {
-            Remove(position);
-
-            items.Add(new BorderStyle(position));
-        }
-
-        /// <summary>
-        /// Adds a new border style.
-        /// </summary>
-        /// <param name="position">Border's position.</param>
         /// <param name="color">Border's color.</param>
         public void Add(BorderStylePosition position, string color)
         {

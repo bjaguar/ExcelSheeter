@@ -168,5 +168,18 @@ namespace ExcelSheeter.Test
             // Assert
             Assert.IsNotNull(sheet.OuterXml);
         }
+
+        [TestMethod]
+        public void Worksheet_Get()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            // Act
+            var cell = sheet["c5"];
+
+            // Assert
+            Assert.IsNotNull(cell);
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace ExcelSheeter.Test
         {
             // Arrange
             var list = new BorderStyleCollection();
-            list.Add(BorderStylePosition.Bottom);
+            list.Add(BorderStylePosition.Bottom, "#000");
 
             // Act
             list.Add(BorderStylePosition.Bottom, "#fff");
@@ -60,7 +60,7 @@ namespace ExcelSheeter.Test
             var list = new BorderStyleCollection();
 
             // Act
-            list.Add(position);
+            list.Add(position, "#000");
 
             // Assert
             Assert.AreEqual(1, list.Count);
@@ -176,7 +176,7 @@ namespace ExcelSheeter.Test
         {
             // Arrange
             var list = new BorderStyleCollection();
-            list.Add(BorderStylePosition.Bottom);
+            list.Add(BorderStylePosition.Bottom, "#000");
 
             // Act
             var value = list.Remove(BorderStylePosition.Bottom);
@@ -190,7 +190,7 @@ namespace ExcelSheeter.Test
         {
             // Arrange
             var list = new BorderStyleCollection();
-            list.Add(BorderStylePosition.Bottom);
+            list.Add(BorderStylePosition.Bottom, "#000");
 
             // Act
             var value = list.Remove(BorderStylePosition.Top);

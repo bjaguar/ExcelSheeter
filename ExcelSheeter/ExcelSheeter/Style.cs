@@ -88,10 +88,15 @@ namespace ExcelSheeter
         /// <summary>
         /// Gets the borders style.
         /// </summary>
-        public BordersStyle BordersStyle
+        internal BordersStyle BordersStyle
         {
             get { return excelBordersStyle; }
         }
+
+        /// <summary>
+        /// Gets the border collection.
+        /// </summary>
+        public BorderStyleCollection Borders { get { return BordersStyle.Borders; } }
 
         /// <summary>
         /// Gets the font style.

@@ -90,6 +90,13 @@ namespace ExcelSheeter
         }
 
         /// <summary>
+        /// Gets the cell with the specified name.
+        /// </summary>
+        /// <param name="name">Cell's name.</param>
+        /// <returns>A <see cref="Cell"/> object.</returns>
+        public Cell this[string name] { get { return GetCell(name); } }
+
+        /// <summary>
         /// Gets the column collection.
         /// </summary>
         public ColumnCollection Columns { get { return Table.Columns; } }

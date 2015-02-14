@@ -41,7 +41,7 @@ namespace ExcelSheeter.Test
         {
             // Arrange
             var style = new BordersStyle();
-            style.Borders.Add(BorderStylePosition.Bottom);
+            style.Borders.Add(BorderStylePosition.Bottom, "#000");
 
             // Act
             var xml = style.OuterXml;

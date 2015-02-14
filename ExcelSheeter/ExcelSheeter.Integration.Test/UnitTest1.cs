@@ -22,7 +22,7 @@ using System.IO;
 namespace ExcelSheeter.Integration.Test
 {
     [TestClass]
-    public class Test1
+    public class UnitTest1
     {
         private readonly string[][] Items = new string[][]
         {
@@ -43,10 +43,10 @@ namespace ExcelSheeter.Integration.Test
 
 
             var style2 = workbook.AddStyle("id2");
-            style2.BordersStyle.Borders.Add(BorderStylePosition.Bottom, "black", BorderLineStyle.Continuous);
-            style2.BordersStyle.Borders.Add(BorderStylePosition.Left, "black", BorderLineStyle.Continuous);
-            style2.BordersStyle.Borders.Add(BorderStylePosition.Right, "black", BorderLineStyle.Continuous);
-            style2.BordersStyle.Borders.Add(BorderStylePosition.Top, "black", BorderLineStyle.Continuous);
+            style2.Borders.Add(BorderStylePosition.Bottom, "black", BorderLineStyle.Continuous);
+            style2.Borders.Add(BorderStylePosition.Left, "black", BorderLineStyle.Continuous);
+            style2.Borders.Add(BorderStylePosition.Right, "black", BorderLineStyle.Continuous);
+            style2.Borders.Add(BorderStylePosition.Top, "black", BorderLineStyle.Continuous);
             style2.FontStyle.Bold = true;
             style2.FontStyle.Italic = true;
             style2.AlignmentStyle.Horizontal = HorizontalAlignment.Right;
@@ -99,7 +99,7 @@ namespace ExcelSheeter.Integration.Test
             // Assertions
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             
-            File.WriteAllText(path + @"\file.xml", outerXml);
+            File.WriteAllText(path + @"\file1.xml", outerXml);
         }
     }
 }
