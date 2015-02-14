@@ -22,7 +22,7 @@ namespace ExcelSheeter.Test
         public void StyleCollection_Add()
         {
             // Arrange
-            var style = new Style();
+            var style = new Style("id");
             var list = new StyleCollection();
 
             // Act
@@ -36,7 +36,7 @@ namespace ExcelSheeter.Test
         public void StyleCollection_Clear()
         {
             // Arrange
-            var style = new Style();
+            var style = new Style("id");
             var list = new StyleCollection();
             list.Add(style);
 
@@ -51,7 +51,7 @@ namespace ExcelSheeter.Test
         public void StyleCollection_Contains()
         {
             // Arrange
-            var style = new Style();
+            var style = new Style("id");
             var list = new StyleCollection();
             list.Add(style);
 
@@ -66,7 +66,7 @@ namespace ExcelSheeter.Test
         public void StyleCollection_Remove()
         {
             // Arrange
-            var style = new Style();
+            var style = new Style("id");
             var list = new StyleCollection();
             list.Add(style);
 
@@ -82,7 +82,7 @@ namespace ExcelSheeter.Test
         public void StyleCollection_OuterXml()
         {
             // Arrange
-            var style = new Style();
+            var style = new Style("id");
             var list = new StyleCollection();
             list.Add(style);
 

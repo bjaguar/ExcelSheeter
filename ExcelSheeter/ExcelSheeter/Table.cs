@@ -27,7 +27,7 @@ namespace ExcelSheeter
     /// <summary>
     /// Represents an Excel table.
     /// </summary>
-    public sealed class Table : ExcelEntity
+    internal sealed class Table : ExcelEntity
     {
         private readonly ColumnCollection columns = new ColumnCollection();
 

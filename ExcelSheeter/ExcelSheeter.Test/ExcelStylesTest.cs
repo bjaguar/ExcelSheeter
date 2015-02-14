@@ -41,7 +41,7 @@ namespace ExcelSheeter.Test
         {
             // Arrange
             var style = new ExcelStyles();
-            style.Styles.Add(new Style());
+            style.Styles.Add(new Style("id"));
 
             // Act
             var xml = style.OuterXml;

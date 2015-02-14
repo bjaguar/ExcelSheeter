@@ -61,11 +61,47 @@ namespace ExcelSheeter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The attribute&apos;s key already exists..
+        /// </summary>
+        internal static string ExcelAttributeCollection_DuplicateKey {
+            get {
+                return ResourceManager.GetString("ExcelAttributeCollection_DuplicateKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The id already exists..
+        /// </summary>
+        internal static string StyleCollection_DuplicateId {
+            get {
+                return ResourceManager.GetString("StyleCollection_DuplicateId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The style was not found..
+        /// </summary>
+        internal static string StyleCollection_ItemNotFound {
+            get {
+                return ResourceManager.GetString("StyleCollection_ItemNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name already exists in the workbook..
         /// </summary>
         internal static string WorksheetCollection_DuplicateName {
             get {
                 return ResourceManager.GetString("WorksheetCollection_DuplicateName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The worksheet was not found in the workbook..
+        /// </summary>
+        internal static string WorksheetCollection_ItemNotFound {
+            get {
+                return ResourceManager.GetString("WorksheetCollection_ItemNotFound", resourceCulture);
             }
         }
     }

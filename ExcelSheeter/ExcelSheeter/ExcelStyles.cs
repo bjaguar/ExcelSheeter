@@ -33,7 +33,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Gets or sets the style collection.
         /// </summary>
-        public StyleCollection Styles
+        internal StyleCollection Styles
         {
             get { return styles; }
         }

@@ -117,7 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ExcelAttributeCollection_DuplicateKey" xml:space="preserve">
+    <value>The attribute's key already exists.</value>
+  </data>
+  <data name="StyleCollection_DuplicateId" xml:space="preserve">
+    <value>The id already exists.</value>
+  </data>
+  <data name="StyleCollection_ItemNotFound" xml:space="preserve">
+    <value>The style was not found.</value>
+  </data>
   <data name="WorksheetCollection_DuplicateName" xml:space="preserve">
     <value>The name already exists in the workbook.</value>
+  </data>
+  <data name="WorksheetCollection_ItemNotFound" xml:space="preserve">
+    <value>The worksheet was not found in the workbook.</value>
   </data>
 </root>

@@ -52,67 +52,189 @@ namespace ExcelSheeter
         /// <returns>A <see cref="Worksheet"/> object.</returns>
         public Worksheet GetWorksheet(string name)
         {
-            var sheet = Sheets.Single(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            Worksheet sheet;
+
+            var value = TryGetWorksheet(name, out sheet);
+
+            if (!value) throw new InvalidOperationException(Resources.Exceptions.WorksheetCollection_ItemNotFound);
 
             return sheet;
         }
 
         /// <summary>
-        /// Returns the specified cell.
+        /// Tries to return one worksheet.
         /// </summary>
-        /// <param name="worksheetName">Worksheet's name.</param>
-        /// <param name="cellName">Cell's name.</param>
-        /// <returns>A <see cref="Cell"/> object.</returns>
-        public Cell GetCell(string worksheetName, string cellName)
+        /// <param name="name">Worksheet's name.</param>
+        /// <param name="sheet">A <see cref="Worksheet"/> output parameter.</param>
+        /// <returns>A value indicating if the worksheet was returned.</returns>
+        public bool TryGetWorksheet(string name, out Worksheet sheet)
         {
-            var worksheet = GetWorksheet(worksheetName);
+            sheet = Sheets.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-            var cell = worksheet.GetCell(cellName);
-
-            return cell;
+            return sheet != null;
         }
 
         /// <summary>
-        /// Returns the specified cell.
+        /// Returns a <see cref="Style"/> object given it's identifier.
         /// </summary>
-        /// <param name="worksheetName">Worksheet's name.</param>
-        /// <param name="row">Row's index.</param>
-        /// <param name="col">Col's name.</param>
-        /// <returns>A <see cref="Cell"/> object.</returns>
-        public Cell GetCell(string worksheetName, int row, string col)
+        /// <param name="id">Style's identifier.</param>
+        /// <returns>A <see cref="Style"/> object.</returns>
+        public Style GetStyle(string id)
         {
-            var worksheet = GetWorksheet(worksheetName);
+            Style style;
 
-            var cell = worksheet.GetCell(row, col);
+            var value = TryGetStyle(id, out style);
 
-            return cell;
+            if (!value) throw new InvalidOperationException(Resources.Exceptions.StyleCollection_ItemNotFound);
+
+            return style;
         }
 
         /// <summary>
-        /// Returns the specified cell.
+        /// Tries to obtain a <see cref="Style"/> object given it's identifier.
         /// </summary>
-        /// <param name="worksheetName">Worksheet's name.</param>
-        /// <param name="row">Row's index.</param>
-        /// <param name="col">Col's index.</param>
-        /// <returns>A <see cref="Cell"/> object.</returns>
-        public Cell GetCell(string worksheetName, int row, int col)
+        /// <param name="id">Style's identifier.</param>
+        /// <param name="style">A <see cref="Style"/> object.</param>
+        /// <returns>A value indicating if the style was found.</returns>
+        public bool TryGetStyle(string id, out Style style)
         {
-            var worksheet = GetWorksheet(worksheetName);
+            style = Styles.FirstOrDefault(x => x.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
 
-            var cell = worksheet.GetCell(row, col);
+            return style != null;
+        }
 
-            return cell;
+        /// <summary>
+        /// Adds a new style.
+        /// </summary>
+        /// <param name="item">A <see cref="Style"/> object.</param>
+        internal void AddStyle(Style item)
+        {
+            Styles.Add(item);
+        }
+
+        /// <summary>
+        /// Adds a new style.
+        /// </summary>
+        /// <param name="id">Style's identifier.</param>
+        /// <returns>A <see cref="Style"/> object.</returns>
+        public Style AddStyle(string id)
+        {
+            var style = new Style(id);
+
+            AddStyle(style);
+
+            return style;
+        }
+
+        /// <summary>
+        /// Removes one style from the book.
+        /// </summary>
+        /// <param name="item">A <see cref="Style"/> object.</param>
+        /// <returns>A value indicating if the style was removed.</returns>
+        public bool RemoveStyle(Style item)
+        {
+            var value = Styles.Remove(item);
+
+            return value;
+        }
+
+        /// <summary>
+        /// Removes one style from the book.
+        /// </summary>
+        /// <param name="id">Style's identifier.</param>
+        /// <returns>A value indicating if the style was removed.</returns>
+        public bool RemoveStyle(string id)
+        {
+            Style style;
+
+            var value = TryGetStyle(id, out style);
+
+            if (value)
+            {
+                return RemoveStyle(style);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Removes all styles of the book.
+        /// </summary>
+        public void ClearStyles()
+        {
+            Styles.Clear();
+        }
+
+        /// <summary>
+        /// Adds a new sheet to the book.
+        /// </summary>
+        /// <param name="sheet">A <see cref="Worksheet"/> object.</param>
+        internal void AddSheet(Worksheet sheet)
+        {
+            Sheets.Add(sheet);
+        }
+        
+        /// <summary>
+        /// Adds a new sheet to the book.
+        /// </summary>
+        /// <param name="name">Worksheet's name.</param>
+        /// <returns>A <see cref="Worksheet"/> object.</returns>
+        public Worksheet AddSheet(string name)
+        {
+            var sheet = new Worksheet(name);
+
+            AddSheet(sheet);
+
+            return sheet;
+        }
+
+        /// <summary>
+        /// Removes one sheet of the book.
+        /// </summary>
+        /// <param name="sheet">A <see cref="Worksheet"/> object.</param>
+        /// <returns>A value indicating if the sheet was removed.</returns>
+        public bool RemoveSheet(Worksheet sheet)
+        {
+            var value = Sheets.Remove(sheet);
+
+            return value;
+        }
+
+        /// <summary>
+        /// Removes one sheet of the book.
+        /// </summary>
+        /// <param name="name">The worksheet's name.</param>
+        /// <returns>A value indicating if the sheet was removed.</returns>
+        public bool RemoveSheet(string name)
+        {
+            Worksheet sheet;
+            var value = TryGetWorksheet(name, out sheet);
+
+            if (value)
+            {
+                return RemoveSheet(sheet);
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// Removes all the sheets in the book.
+        /// </summary>
+        public void ClearSheets()
+        {
+            Sheets.Clear();
         }
 
         /// <summary>
         /// Gets the styles of this book.
         /// </summary>
-        public StyleCollection Styles { get { return styles.Styles; } }
+        internal StyleCollection Styles { get { return styles.Styles; } }
 
         /// <summary>
         /// Gets the sheets of this book.
         /// </summary>
-        public WorksheetCollection Sheets { get { return sheets; } }
+        internal WorksheetCollection Sheets { get { return sheets; } }
 
         internal override string TagName { get { return "ss:Workbook"; } }
 

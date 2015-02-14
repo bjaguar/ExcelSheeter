@@ -34,7 +34,7 @@ namespace ExcelSheeter
         /// Creates a new <see cref="Worksheet"/> object.
         /// </summary>
         /// <param name="name">The sheet name.</param>
-        public Worksheet(string name)
+        internal Worksheet(string name)
         {
             Attributes[AttributeConstants.Name] = name;
         }
@@ -42,7 +42,7 @@ namespace ExcelSheeter
         /// <summary>
         /// Gets the table asociated to this sheet.
         /// </summary>
-        public Table Table
+        internal Table Table
         {
             get { return table; }
         }

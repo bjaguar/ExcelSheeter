@@ -29,7 +29,7 @@ namespace ExcelSheeter.Test
             // Arrange
 
             // Act
-            var attr = new ExcelAttribute();
+            var attr = new ExcelAttribute("key");
 
             // Assert
             Assert.IsNotNull(attr);

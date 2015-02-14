@@ -16,10 +16,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExcelSheeter
 {
@@ -29,9 +25,33 @@ namespace ExcelSheeter
     public sealed class NumberFormatStyle : StyleEntity
     {
         /// <summary>
+        /// Converts an <see cref="NumberFormatStyle"/> to string.
+        /// </summary>
+        /// <param name="style">A <see cref="NumberFormatStyle"/> object.</param>
+        /// <returns>A string with the format.</returns>
+        public static implicit operator string(NumberFormatStyle style)
+        {
+            if (style != null) return style.Format;
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Converts a string into a <see cref="NumberFormatStyle"/> object.
+        /// </summary>
+        /// <param name="value">The format's value.</param>
+        /// <returns>A <see cref="NumberFormatStyle"/> object.</returns>
+        public static implicit operator NumberFormatStyle(string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value)) return new NumberFormatStyle { Format = value, };
+
+            return null;
+        }
+
+        /// <summary>
         /// Gets or sets the format style value.
         /// </summary>
-        public string Format
+        internal string Format
         {
             get { return Attributes[AttributeConstants.FormatName]; }
             set { Attributes[AttributeConstants.FormatName] = value; }

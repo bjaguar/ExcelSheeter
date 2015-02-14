@@ -52,6 +52,29 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void ExcelAttributeCollection_Add_ExistingKey_ThrowsException()
+        {
+            // Arrange
+            var thrown = false;
+            var key = "key";
+            var value1 = "value1";
+            var value2 = "value2";
+
+            var list = new ExcelAttributeCollection();
+            list.Add(key, value1);
+
+            // Act
+            try
+            {
+                list.Add(key, value2);
+            }
+            catch (ArgumentException) { thrown = true; }
+
+            // Assert
+            Assert.IsTrue(thrown);
+        }
+
+        [TestMethod]
         public void ExcelAttributeCollection_Contains_ExistingKey()
         {
             // Arrange
@@ -63,6 +86,23 @@ namespace ExcelSheeter.Test
 
             // Act
             var exists = list.Contains("key");
+
+            // Assert
+            Assert.IsTrue(exists);
+        }
+
+        [TestMethod]
+        public void ExcelAttributeCollection_Contains_ExistingKey_IgnoresCase()
+        {
+            // Arrange
+            var key = "key";
+            var value = "value";
+
+            var list = new ExcelAttributeCollection();
+            list.Add(key, value);
+
+            // Act
+            var exists = list.Contains("KEY");
 
             // Assert
             Assert.IsTrue(exists);

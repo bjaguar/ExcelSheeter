@@ -37,14 +37,12 @@ namespace ExcelSheeter.Integration.Test
 
         private void CreateStyles(Workbook workbook)
         {
-            var style1 = new Style();
-            style1.Id = "style1";
+            var style1 = workbook.AddStyle("id1");
             style1.InteriorStyle.Pattern = InteriorStylePattern.Solid;
             style1.InteriorStyle.Color = "#ededed";
-            workbook.Styles.Add(style1);
 
-            var style2 = new Style();
-            style2.Id = "style2";
+
+            var style2 = workbook.AddStyle("id2");
             style2.BordersStyle.Borders.Add(new BorderStyle(BorderStylePosition.Bottom, "black", BorderLineStyle.Continuous));
             style2.BordersStyle.Borders.Add(new BorderStyle(BorderStylePosition.Left, "black", BorderLineStyle.Continuous));
             style2.BordersStyle.Borders.Add(new BorderStyle(BorderStylePosition.Right, "black", BorderLineStyle.Continuous));
@@ -52,13 +50,10 @@ namespace ExcelSheeter.Integration.Test
             style2.FontStyle.Bold = true;
             style2.FontStyle.Italic = true;
             style2.AlignmentStyle.Horizontal = HorizontalAlignment.Right;
-            workbook.Styles.Add(style2);
         }
 
-        private Worksheet CreateSheet(string name)
+        private void CreateSheet(Worksheet worksheet)
         {
-            var worksheet = new Worksheet(name);
-
             // Add data
             foreach (var itemRow in Items)
             {
@@ -73,8 +68,6 @@ namespace ExcelSheeter.Integration.Test
 
                 worksheet.Rows.Add(row);
             }
-
-            return worksheet;
         }
 
         [TestMethod]
@@ -83,8 +76,8 @@ namespace ExcelSheeter.Integration.Test
             var workbook = new Workbook();
             CreateStyles(workbook);
 
-            var worksheet = CreateSheet("Sheet 1");
-            workbook.Sheets.Add(worksheet);
+            var worksheet = workbook.AddSheet("Sheet 1");
+            CreateSheet(worksheet);
 
             foreach (var row in worksheet.Rows)
             {

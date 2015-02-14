@@ -16,17 +16,15 @@
  */
 
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExcelSheeter
 {
     /// <summary>
     /// Represents a list of Excel attributes.
     /// </summary>
-    public sealed class ExcelAttributeCollection : List<ExcelAttribute>
+    internal sealed class ExcelAttributeCollection : Collection<ExcelAttribute>
     {
         /// <summary>
         /// Adds a new attribute to the list.
@@ -41,13 +39,41 @@ namespace ExcelSheeter
         }
 
         /// <summary>
+        /// Inserts a new item.
+        /// </summary>
+        /// <param name="index">Item's index.</param>
+        /// <param name="item">A <see cref="ExcelAttribute"/> object.</param>
+        protected override void InsertItem(int index, ExcelAttribute item)
+        {
+            if (item == null) throw new ArgumentNullException("item");
+
+            if (Contains(item.Key)) throw new ArgumentException(Resources.Exceptions.ExcelAttributeCollection_DuplicateKey);
+
+            base.InsertItem(index, item);
+        }
+
+        /// <summary>
+        /// Replaces the element at the specified index.
+        /// </summary>
+        /// <param name="index">Item's index.</param>
+        /// <param name="item">A <see cref="ExcelAttribute"/> object.</param>
+        protected override void SetItem(int index, ExcelAttribute item)
+        {
+            if (item == null) throw new ArgumentNullException("item");
+
+            if (Contains(item.Key)) throw new ArgumentException(Resources.Exceptions.ExcelAttributeCollection_DuplicateKey);
+
+            base.SetItem(index, item);
+        }
+
+        /// <summary>
         /// Returns a value indicating if a key exists in the list.
         /// </summary>
         /// <param name="key">Key of the attribute.</param>
         /// <returns>A value indicating if the key exists in the list.</returns>
         public bool Contains(string key)
         {
-            var value = this.Any(x => x.Key == key);
+            var value = this.Any(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
 
             return value;
         }
@@ -59,7 +85,7 @@ namespace ExcelSheeter
         /// <returns>A value indicating if the item was deleted.</returns>
         public bool Remove(string key)
         {
-            var item = this.FirstOrDefault(x => x.Key == key);
+            var item = this.FirstOrDefault(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
 
             if (item != null)
             {
@@ -80,13 +106,13 @@ namespace ExcelSheeter
         {
             get
             {
-                var item = this.Single(x => x.Key == key);
+                var item = this.Single(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
 
                 return item.Value;
             }
             set
             {
-                var item = this.FirstOrDefault(x => x.Key == key);
+                var item = this.FirstOrDefault(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
 
                 if (item != null)
                 {

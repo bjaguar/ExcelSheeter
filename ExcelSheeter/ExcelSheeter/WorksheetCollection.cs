@@ -42,8 +42,15 @@ namespace ExcelSheeter
             return value;
         }
 
+        /// <summary>
+        /// Inserts a new item.
+        /// </summary>
+        /// <param name="index">The item's index.</param>
+        /// <param name="item">A <see cref="Worksheet"/> object.</param>
         protected override void InsertItem(int index, Worksheet item)
         {
+            if (item == null) throw new ArgumentNullException("item");
+
             if (Contains(item.Name)) throw new ArgumentException(Resources.Exceptions.WorksheetCollection_DuplicateName);
 
             base.InsertItem(index, item);

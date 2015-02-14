@@ -43,8 +43,10 @@ namespace ExcelSheeter
         /// <summary>
         /// Creates a new <see cref="Style"/> object.
         /// </summary>
-        public Style()
+        /// <param name="id">Style's identifier.</param>
+        public Style(string id)
         {
+            Id = id;
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace ExcelSheeter
         public string Id
         {
             get { return Attributes[AttributeConstants.IdName]; }
-            set
+            internal set
             {
                 if (string.IsNullOrEmpty(value)) throw new ArgumentNullException("value");
 

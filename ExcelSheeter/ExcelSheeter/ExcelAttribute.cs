@@ -16,17 +16,13 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExcelSheeter
 {
     /// <summary>
     /// Represents an Excel attribute.
     /// </summary>
-    public sealed class ExcelAttribute
+    internal sealed class ExcelAttribute
     {
         private readonly string _key = string.Empty;
 
@@ -35,15 +31,17 @@ namespace ExcelSheeter
         /// <summary>
         /// Constructor.
         /// </summary>
-        public ExcelAttribute()
+        /// <param name="key">The attribute's key.</param>
+        public ExcelAttribute(string key)
         {
+            _key = key;
         }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="key">Attribute key.</param>
-        /// <param name="value">Attribute value.</param>
+        /// <param name="key">Attribute's key.</param>
+        /// <param name="value">Attribute's value.</param>
         public ExcelAttribute(string key, string value)
         {
             _key = key;

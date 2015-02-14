@@ -29,7 +29,7 @@ namespace ExcelSheeter.Test
             // Arrange
 
             // Act
-            var style = new Style();
+            var style = new Style("id");
 
             // Assert
             Assert.IsNotNull(style);
@@ -48,7 +48,7 @@ namespace ExcelSheeter.Test
             var id = "id";
             var name = "name";
 
-            var style = new Style();
+            var style = new Style("id");
 
             // Act
             style.Id = id;
@@ -66,7 +66,7 @@ namespace ExcelSheeter.Test
             var thrown = false;
             var id = "";
 
-            var style = new Style();
+            var style = new Style("id");
 
             // Act
             try
@@ -86,7 +86,7 @@ namespace ExcelSheeter.Test
             var thrown = false;
             var name = "";
 
-            var style = new Style();
+            var style = new Style("id");
 
             // Act
             try
@@ -106,7 +106,7 @@ namespace ExcelSheeter.Test
             var id = "id";
             var name = "name";
 
-            var style = new Style();
+            var style = new Style("id");
             style.Id = id;
             style.Name = name;
 

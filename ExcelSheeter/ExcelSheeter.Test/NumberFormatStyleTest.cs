@@ -63,5 +63,58 @@ namespace ExcelSheeter.Test
             // Assert
             Assert.IsNotNull(xml);
         }
+
+        [TestMethod]
+        public void NumberFormatStyle_OuterXml_EmptyNode()
+        {
+            // Arrange
+            var style = new NumberFormatStyle();
+
+            // Act
+            var xml = style.OuterXml;
+
+            // Assert
+            Assert.IsNotNull(xml);
+            Assert.AreEqual(string.Empty, xml);
+        }
+
+        [TestMethod]
+        public void NumerFormatStyle_ImplicitOperator()
+        {
+            // Arrange
+            NumberFormatStyle style;
+
+            // Act
+            style = "format";
+            string format = style;
+
+            // Assert
+            Assert.AreEqual("format", format);
+        }
+
+        [TestMethod]
+        public void NumerFormatStyle_ImplicitOperator_EmptyStringParam_ReturnsNull()
+        {
+            // Arrange
+
+            // Act
+            NumberFormatStyle style = string.Empty;
+
+            // Assert
+            Assert.IsNull(style);
+        }
+
+        [TestMethod]
+        public void NumerFormatStyle_ImplicitOperator_NullFormatParam()
+        {
+            // Arrange
+
+            // Act
+            NumberFormatStyle style = null;
+            string format = style;
+
+            // Assert
+            Assert.AreEqual(string.Empty, format);
+        }
     }
 }

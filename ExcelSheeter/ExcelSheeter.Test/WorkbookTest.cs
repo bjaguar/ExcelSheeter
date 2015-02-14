@@ -36,6 +36,44 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void Workbook_TryGetWorksheet()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+            book.Sheets.Add(sheet);
+
+            Worksheet returnedSheet;
+
+            // Act
+            var value = book.TryGetWorksheet("name", out returnedSheet);
+
+            // Assert
+            Assert.IsTrue(value);
+            Assert.AreEqual(sheet, returnedSheet);
+        }
+
+        [TestMethod]
+        public void Workbook_TryGetWorksheet_WrongSheetName_ReturnsFalse()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+            book.Sheets.Add(sheet);
+
+            Worksheet returnedSheet;
+
+            // Act
+            var value = book.TryGetWorksheet("wrongname", out returnedSheet);
+
+            // Assert
+            Assert.IsFalse(value);
+            Assert.IsNull(returnedSheet);
+        }
+
+        [TestMethod]
         public void Workbook_GetWorksheet()
         {
             // Arrange
@@ -49,6 +87,122 @@ namespace ExcelSheeter.Test
 
             // Assert
             Assert.AreEqual(sheet, returnedSheet);
+        }
+
+        [TestMethod]
+        public void Workbook_GetWorksheet_WrongSheetName_ThrowsException()
+        {
+            // Arrange
+            var thrown = false;
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+            book.Sheets.Add(sheet);
+
+            // Act
+            try
+            {
+                var returnedSheet = book.GetWorksheet("wrongname");
+            }
+            catch { thrown = true; }
+
+            // Assert
+            Assert.IsTrue(thrown);
+        }
+
+        [TestMethod]
+        public void Workbook_AddWorksheet()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+
+            // Act
+            book.AddSheet(sheet);
+
+            // Assert
+            Assert.AreEqual(1, book.Sheets.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_AddWorksheet_ByName()
+        {
+            // Arrange
+            var book = new Workbook();
+
+            // Act
+            book.AddSheet("name");
+
+            // Assert
+            Assert.AreEqual(1, book.Sheets.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_RemoveWorksheet()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+            book.AddSheet(sheet);
+
+            // Act
+            var value = book.RemoveSheet(sheet);
+
+            // Assert
+            Assert.IsTrue(value);
+            Assert.AreEqual(0, book.Sheets.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_RemoveWorksheet_ByName()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+            book.AddSheet(sheet);
+
+            // Act
+            var value = book.RemoveSheet("name");
+
+            // Assert
+            Assert.IsTrue(value);
+            Assert.AreEqual(0, book.Sheets.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_RemoveWorksheet_ByName_WrongName_ReturnsFalse()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+            book.AddSheet(sheet);
+
+            // Act
+            var value = book.RemoveSheet("wrongname");
+
+            // Assert
+            Assert.IsFalse(value);
+            Assert.AreEqual(1, book.Sheets.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_ClearWorksheets()
+        {
+            // Arrange
+            var sheet = new Worksheet("name");
+
+            var book = new Workbook();
+            book.AddSheet(sheet);
+
+            // Act
+            book.ClearSheets();
+
+            // Assert
+            Assert.AreEqual(0, book.Sheets.Count);
         }
 
         [TestMethod]
@@ -87,7 +241,7 @@ namespace ExcelSheeter.Test
             book.Sheets.Add(sheet);
 
             // Act
-            var returnedCell = book.GetCell("name", 0, 1);
+            var returnedCell = sheet.GetCell(0, 1);
 
             // Assert
             Assert.AreEqual("value2", returnedCell.Value);
@@ -113,7 +267,7 @@ namespace ExcelSheeter.Test
             book.Sheets.Add(sheet);
 
             // Act
-            var returnedCell = book.GetCell("name", 0, "b");
+            var returnedCell = sheet.GetCell(0, "b");
 
             // Assert
             Assert.AreEqual("value2", returnedCell.Value);
@@ -139,10 +293,180 @@ namespace ExcelSheeter.Test
             book.Sheets.Add(sheet);
 
             // Act
-            var returnedCell = book.GetCell("name", "b1");
+            var returnedCell = sheet.GetCell("b1");
 
             // Assert
             Assert.AreEqual("value2", returnedCell.Value);
+        }
+
+        [TestMethod]
+        public void Workbook_AddStyle()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+
+            // Act
+            book.AddStyle(style);
+
+            // Assert
+            Assert.AreEqual(1, book.Styles.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_AddStyle_ByName()
+        {
+            // Arrange
+            var book = new Workbook();
+
+            // Act
+            var style = book.AddStyle("id");
+
+            // Assert
+            Assert.AreEqual(1, book.Styles.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_GetStyle()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            // Act
+            var returnedStyle = book.GetStyle("id");
+
+            // Assert
+            Assert.AreEqual(style, returnedStyle);
+        }
+
+        [TestMethod]
+        public void Workbook_GetStyle_WrongId_ThrowsException()
+        {
+            // Arrange
+            var thrown = false;
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            // Act
+            try
+            {
+                var returnedStyle = book.GetStyle("wrongid");
+            }
+            catch { thrown = true; }
+
+            // Assert
+            Assert.IsTrue(thrown);
+        }
+
+        [TestMethod]
+        public void Workbook_TryGetStyle()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            Style returnedStyle;
+
+            // Act
+            var value = book.TryGetStyle("id", out returnedStyle);
+
+            // Assert
+            Assert.IsTrue(value);
+            Assert.AreEqual(style, returnedStyle);
+        }
+
+        [TestMethod]
+        public void Workbook_TryGetStyle_WrongId_ReturnsFalse()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            Style returnedStyle;
+
+            // Act
+            var value = book.TryGetStyle("wrongid", out returnedStyle);
+
+            // Assert
+            Assert.IsFalse(value);
+            Assert.IsNull(returnedStyle);
+        }
+
+        [TestMethod]
+        public void Workbook_RemoveStyle()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            // Act
+            var value = book.RemoveStyle(style);
+
+            // Assert
+            Assert.IsTrue(value);
+            Assert.AreEqual(0, book.Styles.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_RemoveStyle_ById()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            // Act
+            var value = book.RemoveStyle("id");
+
+            // Assert
+            Assert.IsTrue(value);
+            Assert.AreEqual(0, book.Styles.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_RemoveStyle_ByName_WrongId_ReturnsFalse()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            // Act
+            var value = book.RemoveStyle("wrongid");
+
+            // Assert
+            Assert.IsFalse(value);
+            Assert.AreEqual(1, book.Styles.Count);
+        }
+
+        [TestMethod]
+        public void Workbook_ClearStyle()
+        {
+            // Arrange
+            var style = new Style("id");
+
+            var book = new Workbook();
+            book.AddStyle(style);
+
+            // Act
+            book.ClearStyles();
+
+            // Assert
+            Assert.AreEqual(0, book.Styles.Count);
         }
     }
 }

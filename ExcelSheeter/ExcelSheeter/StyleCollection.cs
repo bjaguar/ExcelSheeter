@@ -27,7 +27,7 @@ namespace ExcelSheeter
     /// <summary>
     /// Represents a style collection.
     /// </summary>
-    public sealed class StyleCollection : ExcelEntity, ICollection<Style>
+    internal sealed class StyleCollection : ExcelEntity, ICollection<Style>
     {
         private Collection<Style> items = new Collection<Style>();
 
@@ -55,6 +55,8 @@ namespace ExcelSheeter
         /// <returns>A value indicating if the item exists in the collection.</returns>
         public bool Contains(Style item)
         {
+            if (items.Any(x => x.Id.Equals(item.Id, StringComparison.OrdinalIgnoreCase))) throw new ArgumentException(Resources.Exceptions.StyleCollection_DuplicateId);
+
             var value = items.Contains(item);
 
             return value;
