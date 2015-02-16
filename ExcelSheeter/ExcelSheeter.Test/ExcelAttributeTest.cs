@@ -65,6 +65,20 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void ExcelAttribute_SetValue_EncodeText()
+        {
+            // Arrange
+            var expected = "&lt;&gt;&quot;\n\r&amp;#;";
+            var attr = new ExcelAttribute("name", "value");
+
+            // Act
+            attr.Value = "<>\"\n\r&#;";
+
+            // Assert
+            Assert.AreEqual(expected, attr.Value);
+        }
+
+        [TestMethod]
         public void ExcelAttribute_GetValue()
         {
             // Arrange

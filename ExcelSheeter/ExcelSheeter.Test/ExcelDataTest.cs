@@ -66,6 +66,21 @@ namespace ExcelSheeter.Test
         }
 
         [TestMethod]
+        public void ExcelData_SetValue_EncodeString()
+        {
+            // Arrange
+            var expected = "&lt;&gt;&quot;\n\r&amp;#;";
+            var value = "<>\"\n\r&#;";
+            var data = new ExcelData();
+
+            // Act
+            data.Value = value;
+
+            // Assert
+            Assert.AreEqual(expected, data.Value);
+        }
+
+        [TestMethod]
         public void ExcelData_OuterXml()
         {
             // Arrange

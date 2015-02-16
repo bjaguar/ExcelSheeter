@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -82,7 +83,21 @@ namespace ExcelSheeter
         public object Value
         {
             get { return _value; }
-            set { this._value = value; }
+            set
+            {
+                var stringValue = value as string;
+
+                if (stringValue != null)
+                {
+                    var encodedValue = SecurityElement.Escape(stringValue);
+
+                    _value = encodedValue;
+                }
+                else
+                {
+                    _value = value;
+                }
+            }
         }
 
         internal override string TagName { get { return "ss:Data"; } }

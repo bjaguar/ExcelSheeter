@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7FCA7227-85DE-43C8-BFDF-C912E1BB8888}"
 	ProjectSection(SolutionItems) = preProject
 		Common\key.txt = Common\key.txt
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
 		Common\Readme.txt = Common\Readme.txt
 	EndProjectSection
 EndProject

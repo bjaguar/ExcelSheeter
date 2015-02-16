@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Security;
 
 namespace ExcelSheeter
 {
@@ -45,7 +46,7 @@ namespace ExcelSheeter
         public ExcelAttribute(string key, string value)
         {
             _key = key;
-            _value = value;
+            Value = value;
         }
 
         /// <summary>
@@ -62,7 +63,12 @@ namespace ExcelSheeter
         public string Value
         {
             get { return _value; }
-            set { _value = value; }
+            set
+            {
+                var encodedValue = SecurityElement.Escape(value);
+                
+                _value = encodedValue;
+            }
         }
     }
 }
